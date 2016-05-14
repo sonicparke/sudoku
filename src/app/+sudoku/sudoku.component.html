@@ -1,0 +1,15 @@
+<md-card>
+   <md-card-subtitle>Brought to you by Electrotastic</md-card-subtitle>
+   <md-card-title>{{title}}</md-card-title>
+   <md-card-content>
+        <div class="game-board-container" >
+        <ul class="row" *ngFor="let row of puzzle; let rowIndex = index">
+          <li class="item" *ngFor="let item of row; let index = index" (click)="itemSelect($event, rowIndex, index)">{{item}}</li>
+        </ul>
+      </div>
+   </md-card-content>
+   <md-card-actions>
+        <button md-button>NEW GAME</button>
+        <button md-button>SUBMIT</button>
+   </md-card-actions>
+</md-card>
