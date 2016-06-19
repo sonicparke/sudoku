@@ -13,11 +13,11 @@ export class SudokuGeneratorService {
       this.puzzle = new Puzzle();
     }
 
-    getPuzzle() {
-      return Promise.resolve(this.puzzle.grid); // How do I do this and not have puzzle.puzzle here?
+    getOriginalPuzzle() {
+      return Promise.resolve(this.puzzle.grid);
     }
 
-    getOPuzzle(): Observable<any> {
+    getPuzzle(): Observable<any> {
       return new Observable((observer:any) => {
         observer.next(this.puzzle);
 
@@ -28,11 +28,11 @@ export class SudokuGeneratorService {
     }
 
     addAnswer(rowIndex: number, index: number, item: any) {
-      console.log('rowIndex 2:', rowIndex);
-      console.log('index 2:', index);
-      console.log('item 2:', item);
-      // this.puzzle.grid[rowIndex][index] = item.toString();
-      // console.log('this.puzzle.grid :', this.puzzle.grid);
+      this.puzzle.grid[rowIndex][index] = item.toString();
+    }
+
+    clearSelectedAnswer(rowIndex: number, index: number, item: any) {
+      this.puzzle.grid[rowIndex][index] = '';
     }
 
 }

@@ -1,3 +1,26 @@
+.flex-container {
+  /* We first create a flex layout context */
+  display: flex;
+
+  /* Then we define the flow direction and if we allow the items to wrap
+   * Remember this is the same as:
+   * flex-direction: row;
+   * flex-wrap: wrap;
+   */
+  flex-flow: row wrap;
+
+  /* Then we define how is distributed the remaining space */
+  justify-content: space-around;
+}
+
+.game-controls {
+  width: 200px;
+
+  button {
+    margin: 3px;
+  }
+}
+
 .game-board-container {
   width: 396px;
   height: 396px;
@@ -25,7 +48,8 @@
   }
 
   .item {
-      background: #fff;
+      color: #444;
+      background-color: #fff;
       padding: 5px;
       width: 32px;
       height: 32px;
@@ -35,6 +59,21 @@
       font-weight: bold;
       font-size: 1em;
       text-align: center;
+
+      &.selected {
+        color: #3c763d;
+        background-color: #dff0d8;
+      }
+
+      &.protected {
+        color: #31708f;
+        background-color: #d9edf7;
+      }
+
+      &.error {
+        color: #a94442;
+        background-color: #f2dede;
+      }
 
       &:nth-child(4) {
         border-left: 2px solid #000;

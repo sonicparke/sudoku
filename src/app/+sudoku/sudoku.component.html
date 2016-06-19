@@ -1,15 +1,28 @@
-<md-card>
+<md-content >
+<md-card class="md-padding" >
    <md-card-subtitle>Brought to you by Electrotastic</md-card-subtitle>
    <md-card-title>{{title}}</md-card-title>
-   <md-card-content>
-        <div class="game-board-container" >
-        <ul class="row" *ngFor="let row of puzzle; let rowIndex = index">
-          <li class="item" *ngFor="let item of row; let index = index" (click)="itemSelect($event, rowIndex, index)">{{item}}</li>
-        </ul>
+
+    <md-card-content class="flex-container">
+      <div class="item">
+        <div class="game-board-container">
+          <ul class="row" *ngFor="let row of puzzle; let rowIndex = index">
+            <li [ngClass]="{'selected': highlightSelected === rowIndex + '' + index, 'protected': isProtected(rowIndex, index) }" class="item" *ngFor="let item of row; let index = index" (click)="itemSelect($event, rowIndex, index)">{{item}}</li>
+          </ul>
+        </div>
       </div>
-   </md-card-content>
-   <md-card-actions>
+      <div class="item game-controls">
+        <button md-fab *ngFor="let item of options" (click)="optionSelect(item)">{{item}}</button>
+        <button md-button (click)="clearSelectedAnswer(item)">Clear</button>
+      </div>
+      <div class="item">
         <button md-button>NEW GAME</button>
         <button md-button>SUBMIT</button>
-   </md-card-actions>
+      </div>
+
+    </md-card-content>
+
+
+
 </md-card>
+</md-content>
