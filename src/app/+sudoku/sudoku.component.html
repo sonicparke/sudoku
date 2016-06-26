@@ -14,10 +14,8 @@
       <div class="item game-controls">
         <button md-fab *ngFor="let item of options" (click)="optionSelect(item)">{{item}}</button>
         <button md-button (click)="clearSelectedAnswer(item)">Clear</button>
-      </div>
-      <div class="item">
         <button md-button>NEW GAME</button>
-        <button md-button>SUBMIT</button>
+        <button md-button (click)="submitPuzzle()">SUBMIT</button>
       </div>
 
     </md-card-content>

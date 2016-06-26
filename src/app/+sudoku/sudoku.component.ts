@@ -25,6 +25,7 @@ export class SudokuComponent implements OnInit {
   public title: string = 'Sudoku Yo!!'
   public isLoading: boolean;
   public puzzle: string[][];
+  public solved_puzzle: string[][];
   public originalPuzzle: string[][];
   public isError: any;
   public highlightSelected: string;
@@ -43,10 +44,20 @@ export class SudokuComponent implements OnInit {
     this.isLoading = true;
     this.gameGenerator.getPuzzle().subscribe(
       (res: any) => {
-        this.puzzle = res.grid;
+        this.puzzle = res;
       },
       (error: any) => {
         this.isLoading = false;
+        this.isError = true;
+      })
+  }
+
+  getSolvedPuzzle() {
+    this.gameGenerator.getSolvedPuzzle().subscribe(
+      (res: any) => {
+        this.puzzle = res;
+      },
+      (error: any) => {
         this.isError = true;
       })
   }
