@@ -7,7 +7,13 @@
       <div class="item">
         <div class="game-board-container">
           <ul class="row" *ngFor="let row of puzzle; let rowIndex = index">
-            <li [ngClass]="{'selected': highlightSelected === rowIndex + '' + index, 'protected': isProtected(rowIndex, index) }" class="item" *ngFor="let item of row; let index = index" (click)="itemSelect($event, rowIndex, index)">{{item}}</li>
+            <app-tile
+              *ngFor="let item of row; let index = index"
+              [answer]="item"
+              [index]="index"
+              [rowIndex]="rowIndex"
+              [onSelect]="itemSelected(array)"
+            ></app-tile>
           </ul>
         </div>
       </div>

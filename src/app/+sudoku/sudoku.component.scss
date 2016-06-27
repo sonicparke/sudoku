@@ -47,7 +47,7 @@
     }
   }
 
-  .item {
+  .answer-item {
       color: #444;
       background-color: #fff;
       padding: 5px;
@@ -60,20 +60,7 @@
       font-size: 1em;
       text-align: center;
 
-      &.selected {
-        color: #3c763d;
-        background-color: #dff0d8;
-      }
 
-      &.protected {
-        color: #31708f;
-        background-color: #d9edf7;
-      }
-
-      &.error {
-        color: #a94442;
-        background-color: #f2dede;
-      }
 
       &:nth-child(4) {
         border-left: 2px solid #000;

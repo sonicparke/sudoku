@@ -53,6 +53,7 @@ const barrels: string[] = [
   'app',
   'app/shared',
   'app/+sudoku',
+  'app/+sudoku/tile',
   /** @cli-barrel */
 ];
 
