@@ -45,11 +45,22 @@ export class SudokuGeneratorService {
       });
     }
 
+    getErrorPuzzle(): Observable<any> {
+      return new Observable((observer:any) => {
+        observer.next(this.puzzle.error_grid);
+
+        return () => {
+          console.log('detroyed');
+        };
+      });
+    }
+
 }
 
-class Puzzle {
+export class Puzzle {
   grid: string[][];
   solved_grid: string[][];
+  error_grid: string[][];
 
   constructor() {
     this.grid = [
@@ -74,6 +85,18 @@ class Puzzle {
       ['9','5','8','4','6','1','7','2','3'],
       ['1','6','2','9','3','7','4','5','8'],
       ['7','3','4','5','8','2','9','6','1']
+    ];
+
+    this.error_grid = [
+      ['','','','','','','','',''],
+      ['','','','','','','','',''],
+      ['','','','','','','','',''],
+      ['','','','','','','','',''],
+      ['','','','','','','','',''],
+      ['','','','','','','','',''],
+      ['','','','','','','','',''],
+      ['','','','','','','','',''],
+      ['','','','','','','','','']
     ];
   }
 

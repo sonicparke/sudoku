@@ -4,7 +4,7 @@ import { MdButton, MdAnchor } from '@angular2-material/button';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import * as _ from 'lodash';
 
-import { SudokuGeneratorService } from './shared/sudoku.generator.service';
+import { SudokuGeneratorService, Puzzle } from './shared/sudoku.generator.service';
 
 @Component({
   moduleId: module.id,
@@ -26,11 +26,13 @@ export class SudokuComponent implements OnInit {
   public isLoading: boolean;
   public puzzle: string[][];
   public solved_puzzle: string[][];
+  public error_puzzle: string[][];
   public originalPuzzle: string[][];
   public isError: any;
   public highlightSelected: string;
   public selected: number[];
   public options: number[];
+  public puzzleSolved: boolean;
 
   constructor(private gameGenerator: SudokuGeneratorService) {}
 
@@ -38,6 +40,9 @@ export class SudokuComponent implements OnInit {
     this.getPuzzle();
     this.getPuzzleAnswerOptions();
     this.setOriginalPuzzle();
+    this.getSolvedPuzzle();
+    this.getErrorPuzzle();
+    this.puzzleSolved = false;
   }
 
   getPuzzle() {
@@ -55,7 +60,7 @@ export class SudokuComponent implements OnInit {
   getSolvedPuzzle() {
     this.gameGenerator.getSolvedPuzzle().subscribe(
       (res: any) => {
-        this.puzzle = res;
+        this.solved_puzzle = res;
       },
       (error: any) => {
         this.isError = true;
@@ -82,6 +87,16 @@ export class SudokuComponent implements OnInit {
       });
   }
 
+  getErrorPuzzle() {
+    this.gameGenerator.getErrorPuzzle().subscribe(
+      (res: any) => {
+        this.error_puzzle = res;
+      },
+      (error: any) => {
+        this.isError = true;
+      })
+  }
+
   getPuzzleAnswerOptions() {
     this.options = [1,2,3,4,5,6,7,8,9]
   }
@@ -90,6 +105,7 @@ export class SudokuComponent implements OnInit {
     if(this.originalPuzzle[rowIndex][index] === '') {
       this.highlightSelected = rowIndex + '' + index;
       this.selected = [rowIndex, index];
+      this.error_puzzle[rowIndex][index] = '';
     }
   }
 
@@ -99,6 +115,33 @@ export class SudokuComponent implements OnInit {
 
   clearSelectedAnswer(item) {
     this.gameGenerator.clearSelectedAnswer(this.selected[0], this.selected[1], item);
+  }
+
+  submitPuzzle() {
+    this.highlightSelected = '';
+    if((this.puzzle && this.solved_puzzle) && _.isEqual(this.puzzle, this.solved_puzzle)) {
+      this.puzzleSolved = true;
+    } else {
+      _.forEach(this.puzzle, (value, row) => {
+      _.forEach(value, (value, key) => {
+        if((this.puzzle && this.solved_puzzle) && _.isEqual(this.puzzle[row][key], this.solved_puzzle[row][key])) {
+        }
+        else {
+          this.error_puzzle[row][key] = 'error';
+        }
+      })
+     })
+    }
+  }
+
+  solvePuzzle() {
+    this.highlightSelected = '';
+    this.puzzle = this.solved_puzzle;
+  }
+
+  newGame() {
+    this.highlightSelected = '';
+    this.ngOnInit();
   }
 
 }

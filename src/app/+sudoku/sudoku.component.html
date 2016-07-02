@@ -7,15 +7,29 @@
       <div class="item">
         <div class="game-board-container">
           <ul class="row" *ngFor="let row of puzzle; let rowIndex = index">
-            <li [ngClass]="{'selected': highlightSelected === rowIndex + '' + index, 'protected': isProtected(rowIndex, index) }" class="item" *ngFor="let item of row; let index = index" (click)="itemSelect($event, rowIndex, index)">{{item}}</li>
+            <li
+              *ngFor="let item of row; let index = index"
+              (click)="itemSelect($event, rowIndex, index)"
+              class="item"
+              [class.selected]="highlightSelected === rowIndex + '' + index"
+              [class.protected]="isProtected(rowIndex, index)"
+              [class.error]="error_puzzle[rowIndex][index] === 'error'"
+              [class.correct]="puzzleSolved"
+            >
+              {{item}}
+            </li>
           </ul>
         </div>
       </div>
       <div class="item game-controls">
         <button md-fab *ngFor="let item of options" (click)="optionSelect(item)">{{item}}</button>
-        <button md-button (click)="clearSelectedAnswer(item)">Clear</button>
-        <button md-button>NEW GAME</button>
+        <button md-button [disabled]="!highlightSelected" (click)="clearSelectedAnswer(item)">Clear</button>
+        <button md-button (click)="newGame()">NEW GAME</button>
         <button md-button (click)="submitPuzzle()">SUBMIT</button>
+        <button md-button (click)="solvePuzzle()">Cheat</button>
+        <div *ngIf="puzzleSolved">
+          <h2>CORRECT!!!</h2>
+        </div>
       </div>
 
     </md-card-content>

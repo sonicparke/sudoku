@@ -61,8 +61,8 @@
       text-align: center;
 
       &.selected {
-        color: #3c763d;
-        background-color: #dff0d8;
+        color: #8a6d3b;
+        background-color: #fcf8e3;
       }
 
       &.protected {
@@ -73,6 +73,11 @@
       &.error {
         color: #a94442;
         background-color: #f2dede;
+      }
+
+      &.correct {
+        color: #3c763d;
+        background-color: #dff0d8;
       }
 
       &:nth-child(4) {
