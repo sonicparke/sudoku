@@ -1,35 +1,20 @@
+// SystemJS configuration file, see links for more information
+// https://github.com/systemjs/systemjs
+// https://github.com/systemjs/systemjs/blob/master/docs/config-api.md
+
 /***********************************************************************************************
  * User Configuration.
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
   'lodash': 'vendor/lodash',
-  '@angular2-material': 'vendor/@angular2-material'
+  'ng2-bootstrap': 'vendor/ng2-bootstrap',
 };
 
 /** User packages configuration. */
 const packages: any = {
   'lodash': {main: 'index'},
-  '@angular2-material/core': {
-    format: 'cjs',
-    defaultExtension: 'js',
-    main: 'core.js'
-  },
-  '@angular2-material/button': {
-    format: 'cjs',
-    defaultExtension: 'js',
-    main: 'button.js'
-  },
-  '@angular2-material/toolbar': {
-    format: 'cjs',
-    defaultExtension: 'js',
-    main: 'toolbar.js'
-  },
-  '@angular2-material/card': {
-    format: 'cjs',
-    defaultExtension: 'js',
-    main: 'card.js'
-  }
+  'ng2-bootstrap': {main: 'ng2-bootstrap'},
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -52,7 +37,6 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
-  'app/+sudoku',
   /** @cli-barrel */
 ];
 

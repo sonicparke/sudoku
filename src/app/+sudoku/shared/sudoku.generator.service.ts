@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
+import * as _ from 'lodash';
 
 @Injectable()
 /**
@@ -13,8 +14,15 @@ export class SudokuGeneratorService {
       this.puzzle = new Puzzle();
     }
 
-    getOriginalPuzzle() {
-      return Promise.resolve(this.puzzle.grid);
+    getOriginalPuzzle(): Observable<any> {
+      return new Observable((observer:any) => {
+        let originalPuzzle = _.cloneDeep(this.puzzle.grid);
+        observer.next(originalPuzzle);
+
+        return () => {
+          console.log('detroyed');
+        };
+      });
     }
 
     getPuzzle(): Observable<any> {

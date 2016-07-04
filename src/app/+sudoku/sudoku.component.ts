@@ -1,7 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MdToolbar } from '@angular2-material/toolbar';
-import { MdButton, MdAnchor } from '@angular2-material/button';
-import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import * as _ from 'lodash';
 
 import { SudokuGeneratorService, Puzzle } from './shared/sudoku.generator.service';
@@ -12,10 +9,7 @@ import { SudokuGeneratorService, Puzzle } from './shared/sudoku.generator.servic
   templateUrl: 'sudoku.component.html',
   styleUrls: ['sudoku.component.css'],
   directives: [
-    MdToolbar,
-    MdButton,
-    MdAnchor,
-    MD_CARD_DIRECTIVES
+
   ],
   providers: [
     SudokuGeneratorService
@@ -81,10 +75,13 @@ export class SudokuComponent implements OnInit {
   }
 
   getOriginalPuzzle() {
-    this.gameGenerator.getOriginalPuzzle().then(
-      (puzzle) => {
-        this.originalPuzzle = _.cloneDeep(puzzle);
-      });
+      this.gameGenerator.getOriginalPuzzle().subscribe(
+      (res: any) => {
+        this.originalPuzzle = res;
+      },
+      (error: any) => {
+        this.isError = true;
+      })
   }
 
   getErrorPuzzle() {

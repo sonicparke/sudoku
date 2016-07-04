@@ -1,9 +1,9 @@
-<md-content >
-<md-card class="md-padding" >
-   <md-card-subtitle>Brought to you by Electrotastic</md-card-subtitle>
-   <md-card-title>{{title}}</md-card-title>
+<div >
+<div class="md-padding" >
+   <h4>Brought to you by Electrotastic</h4>
+   <h2>{{title}}</h2>
 
-    <md-card-content class="flex-container">
+    <div class="flex-container">
       <div class="item">
         <div class="game-board-container">
           <ul class="row" *ngFor="let row of puzzle; let rowIndex = index">
@@ -22,19 +22,19 @@
         </div>
       </div>
       <div class="item game-controls">
-        <button md-fab *ngFor="let item of options" (click)="optionSelect(item)">{{item}}</button>
-        <button md-button [disabled]="!highlightSelected" (click)="clearSelectedAnswer(item)">Clear</button>
-        <button md-button (click)="newGame()">NEW GAME</button>
-        <button md-button (click)="submitPuzzle()">SUBMIT</button>
-        <button md-button (click)="solvePuzzle()">Cheat</button>
+        <button *ngFor="let item of options" (click)="optionSelect(item)">{{item}}</button>
+        <button [disabled]="!highlightSelected" (click)="clearSelectedAnswer(item)">Clear</button>
+        <button (click)="newGame()">NEW GAME</button>
+        <button (click)="submitPuzzle()">SUBMIT</button>
+        <button (click)="solvePuzzle()">Cheat</button>
         <div *ngIf="puzzleSolved">
           <h2>CORRECT!!!</h2>
         </div>
       </div>
 
-    </md-card-content>
+    </div>
 
 
 
-</md-card>
-</md-content>
+</div>
+</div>

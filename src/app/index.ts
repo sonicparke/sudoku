@@ -1,2 +1,2 @@
-export {environment} from './environment';
-export {TestCli3AppComponent} from './test-cli3.component';
+export * from './environment';
+export * from './app.component';
